@@ -1,0 +1,1482 @@
+:root {
+    --bg-color: #f0f2f5;
+    --box-bg: white;
+    --text-color: #333;
+    --text-secondary: #666;
+    --border-color: #ddd;
+    --skill-tag-bg: #e0e0e0;
+    --skill-tag-hover: #d0d0d0;
+    --logo-bg: #e0e0e0;
+    --logo-text: #666;
+    --logo-ring: #4CAF50;
+    --particle-color-1: rgba(255, 255, 255, 1);
+    --particle-color-2: rgba(200, 230, 255, 0.95);
+    --particle-color-3: rgba(160, 210, 255, 0.9);
+    --heading-font: 'Raleway', sans-serif;
+    --body-font: 'Poppins', sans-serif;
+    --bg-dark-purple: #1a1a2e;
+    --bg-medium-purple: #16213e;
+    --rain-color-1: rgba(147, 112, 219, 0.2);
+    --rain-color-2: rgba(138, 43, 226, 0.15);
+    --rain-shine: rgba(255, 255, 255, 0.1);
+    --bg-light-primary: #f8f9fa;
+    --bg-light-secondary: #e9ecef;
+    --rain-color-light-1: rgba(33, 150, 243, 0.1);
+    --rain-color-light-2: rgba(76, 175, 80, 0.1);
+    --rain-shine-light: rgba(255, 255, 255, 0.2);
+    --bg-dark-primary: #1a1a2e;
+    --bg-dark-secondary: #16213e;
+    --rain-color-dark-1: rgba(147, 112, 219, 0.2);
+    --rain-color-dark-2: rgba(138, 43, 226, 0.15);
+}
+
+[data-theme="dark"] {
+    --bg-color: var(--bg-dark-primary);
+    --box-bg: #2d2d2d;
+    --text-color: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #404040;
+    --skill-tag-bg: #404040;
+    --skill-tag-hover: #505050;
+    --logo-bg: #2d2d2d;
+    --logo-text: #ffffff;
+    --logo-ring: #4CAF50;
+    --particle-color-1: rgba(70, 90, 120, 0.4);
+    --particle-color-2: rgba(90, 120, 160, 0.3);
+    --particle-color-3: rgba(100, 140, 180, 0.2);
+    --bg-light-primary: var(--bg-dark-primary);
+    --bg-light-secondary: var(--bg-dark-secondary);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--body-font);
+    background: var(--bg-light-primary);
+    position: relative;
+    overflow-x: hidden;
+    transition: all 0.5s ease;
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        var(--bg-light-primary) 0%,
+        var(--bg-light-secondary) 100%
+    );
+    pointer-events: none;
+    z-index: -2;
+    transition: background 0.5s ease;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        var(--rain-color-light-1) 0%,
+        transparent 60%
+    );
+    animation: glowPulse 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.5s ease;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+}
+
+.rain-spot {
+    position: fixed;
+    width: 200px;
+    height: 400px;
+    pointer-events: none;
+    opacity: 0;
+    animation: rainSpot 8s linear infinite;
+    z-index: 1;
+}
+
+.rain-spot:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.rain-spot:nth-child(2) {
+    top: 30%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.rain-spot:nth-child(3) {
+    bottom: 20%;
+    left: 30%;
+    animation-delay: 4s;
+}
+
+@keyframes rainSpot {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.3; }
+}
+
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.rain-drop {
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(33, 150, 243, 0.2),
+        rgba(76, 175, 80, 0.15)
+    );
+    animation: dropFall linear infinite;
+    filter: drop-shadow(0 0 5px rgba(33, 150, 243, 0.2));
+    transition: background-color 0.5s ease;
+}
+
+@keyframes dropFall {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-wrapper {
+    position: relative;
+    display: flex;
+    width: 120px;
+    height: 120px;
+    background-color: var(--logo-bg);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 
+        background-color 0.5s ease,
+        transform 0.3s ease;
+    overflow: hidden;
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.logo-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 400%;
+    height: 400%;
+    background: linear-gradient(
+        45deg,
+        transparent 32%,
+        rgba(255, 255, 255, 0.15) 35%,
+        rgba(255, 255, 255, 0.35) 38%,
+        rgba(255, 255, 255, 0.15) 41%,
+        transparent 44%
+    );
+    transform: rotate(45deg) translateY(-150%);
+    animation: none;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes shineSweep {
+    0% {
+        transform: rotate(45deg) translateY(-150%);
+    }
+    100% {
+        transform: rotate(45deg) translateY(150%);
+    }
+}
+
+.logo-wrapper:hover::after {
+    animation: shineSweep 1s ease-in-out;
+}
+
+[data-theme="dark"] .logo-wrapper::after {
+    background: linear-gradient(
+        45deg,
+        transparent 32%,
+        rgba(255, 255, 255, 0.1) 35%,
+        rgba(255, 255, 255, 0.2) 38%,
+        rgba(255, 255, 255, 0.1) 41%,
+        transparent 44%
+    );
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-image:not([src]), 
+.logo-image[src=""] {
+    background-color: var(--logo-bg);
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    margin: -1px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.logo-image:not([src])::before,
+.logo-image[src=""]::before,
+.logo-image:not([src])::after,
+.logo-image[src=""]::after {
+    display: none;
+}
+
+.logo-rings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid var(--logo-ring);
+    opacity: 0.0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.ring-1 {
+    width: 60%;
+    height: 60%;
+}
+
+.ring-2 {
+    width: 75%;
+    height: 75%;
+}
+
+.ring-3 {
+    width: 90%;
+    height: 90%;
+}
+
+@keyframes ringPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.about-box, .contact-box {
+    background-color: var(--box-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    transition: 
+        background-color 0.5s ease,
+        color 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.about-box::before,
+.contact-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, var(--particle-color-1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--particle-color-2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, var(--particle-color-3) 0%, transparent 50%);
+    opacity: 0.7;
+    z-index: 0;
+}
+
+.about-box::after,
+.contact-box::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    animation: snowfall 20s linear infinite;
+    background-image: 
+        radial-gradient(4px 4px at 20% 30%, var(--particle-color-1) 50%, transparent 0),
+        radial-gradient(4px 4px at 40% 70%, var(--particle-color-2) 50%, transparent 0),
+        radial-gradient(4px 4px at 60% 40%, var(--particle-color-3) 50%, transparent 0),
+        radial-gradient(3px 3px at 80% 60%, var(--particle-color-1) 50%, transparent 0),
+        radial-gradient(5px 5px at 10% 50%, var(--particle-color-2) 50%, transparent 0),
+        radial-gradient(4px 4px at 30% 90%, var(--particle-color-3) 50%, transparent 0),
+        radial-gradient(5px 5px at 50% 20%, var(--particle-color-1) 50%, transparent 0),
+        radial-gradient(3px 3px at 70% 80%, var(--particle-color-2) 50%, transparent 0),
+        radial-gradient(4px 4px at 90% 10%, var(--particle-color-3) 50%, transparent 0);
+    z-index: 1;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.about-content,
+.contact-form,
+.about-box h1,
+.contact-box h1 {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100%) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100%) rotate(360deg);
+    }
+}
+
+.about-box:hover::after,
+.contact-box:hover::after {
+    animation-play-state: paused;
+}
+
+.about-box:hover::before,
+.contact-box:hover::before {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px var(--particle-color-2);
+}
+
+.submit-btn,
+.edit-btn {
+    background-size: 200% 200%;
+    background-image: linear-gradient(45deg, 
+        #4CAF50 0%, 
+        #4CAF50 25%, 
+        #2196F3 75%, 
+        #2196F3 100%
+    );
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+    background-position: 0% 0%;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.submit-btn {
+    width: 100%;
+}
+
+.edit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.submit-btn:hover,
+.edit-btn:hover {
+    background-position: 100% 100%;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.about-box h1 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.about-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.skills {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 
+        background-color 0.5s ease,
+        color 0.5s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid transparent;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-tag.float-up {
+    transform: translateY(-10px);
+}
+
+/* Individual skill colors */
+.html-skill {
+    background: rgba(228, 77, 38, 0.15);
+    border-color: #E44D26;
+    color: #E44D26;
+}
+
+.css-skill {
+    background: rgba(33, 150, 243, 0.15);
+    border-color: #2196F3;
+    color: #2196F3;
+}
+
+.js-skill {
+    background: rgba(247, 223, 30, 0.15);
+    border-color: #F7DF1E;
+    color: #F7DF1E;
+}
+
+.node-skill {
+    background: rgba(104, 160, 99, 0.15);
+    border-color: #68A063;
+    color: #68A063;
+}
+
+.react-skill {
+    background: rgba(97, 218, 251, 0.15);
+    border-color: #61DAFB;
+    color: #61DAFB;
+}
+
+.git-skill {
+    background: rgba(240, 80, 50, 0.15);
+    border-color: #F05032;
+    color: #F05032;
+}
+
+/* Hover effects */
+.skill-tag:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.skill-tag.float-up:hover {
+    transform: translateY(-15px) scale(1.1);
+}
+
+/* Tooltip styling */
+.skill-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--box-bg);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skill-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px 5px 0 5px;
+    border-style: solid;
+    border-color: var(--box-bg) transparent transparent transparent;
+}
+
+.skill-tag:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .skill-tag {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .skill-tooltip {
+    background: var(--box-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .skill-tooltip::after {
+    border-color: var(--box-bg) transparent transparent transparent;
+}
+
+/* Add animation for icons */
+@keyframes skillPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.skill-tag i {
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover i {
+    animation: skillPulse 1s infinite;
+}
+
+.logout-container {
+    position: static;
+}
+
+.logout-btn {
+    position: relative;
+    background: linear-gradient(45deg, #ff4444, #ff0000);
+    color: white;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--heading-font);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2);
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s ease;
+    z-index: -1;
+}
+
+.logout-btn::after {
+    content: '🚪';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    padding-right: 3.5rem;
+    background: linear-gradient(45deg, #ff0000, #ff4444);
+    box-shadow: 0 4px 20px rgba(255, 68, 68, 0.4);
+    transform: none;
+}
+
+.logout-btn:hover::before {
+    left: 100%;
+}
+
+.logout-btn:hover::after {
+    opacity: 1;
+    right: 1.5rem;
+}
+
+.logout-btn:active {
+    transform: none;
+    box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
+}
+
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 68, 68, 0.4);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2);
+    }
+}
+
+.logout-btn:hover {
+    animation: buttonPulse 1.5s infinite;
+}
+
+@keyframes textShift {
+    0% {
+        transform: translateX(0);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.logout-btn:hover span {
+    display: inline-block;
+    animation: textShift 0.5s ease;
+}
+
+/* Contact Box Styles */
+.contact-box h1 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--body-font);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.2);
+    transform: translateY(-2px);
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label {
+    color: #4CAF50;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .contact-box {
+        padding: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.6rem;
+    }
+    
+    .submit-btn {
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* Add theme switcher styles */
+.top-controls {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    margin: 0 10px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #FFB300, #2196F3);
+    transition: background 0.5s ease;
+    border-radius: 34px;
+    overflow: hidden;
+}
+
+.slider:before {
+    content: "🌞";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+input:checked + .slider {
+    background: linear-gradient(to right, #2196F3, #3F51B5);
+}
+
+input:checked + .slider:before {
+    content: "🌙";
+    transform: translateX(40px);
+    background-color: #2d2d2d;
+    color: white;
+}
+
+.slider.round {
+    border-radius: 34px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.slider.round:before {
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Fix top controls positioning */
+.top-controls {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+}
+
+/* Add hover effects */
+.slider:hover {
+    box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    50% {
+        transform: translateX(20px) rotate(180deg);
+    }
+    100% {
+        transform: translateX(40px) rotate(360deg);
+    }
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(40px) rotate(360deg);
+    }
+    50% {
+        transform: translateX(20px) rotate(180deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+.theme-switch input:checked + .slider:before {
+    animation: slideRight 0.3s forwards;
+}
+
+.theme-switch input:not(:checked) + .slider:before {
+    animation: slideLeft 0.3s forwards;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+    }
+}
+
+.slider:hover {
+    animation: glow 1.5s infinite;
+}
+
+/* Update headings */
+h1, h2 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Update submit button styling */
+.submit-btn {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 1.2rem 2rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+/* Update about section typography */
+.about-box h1,
+.contact-box h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.about-box h1::after,
+.contact-box h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #2196F3);
+    border-radius: 2px;
+}
+
+.about-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    white-space: pre; /* Preserve spaces */
+}
+
+.about-content h2 span {
+    display: inline-block;
+    min-width: 0.2em; /* Minimum width for spaces */
+}
+
+.about-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Update skill tags */
+.skill-tag {
+    font-family: var(--body-font);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Update edit button */
+.edit-btn {
+    font-family: var(--heading-font);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Enhance form placeholder text */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Add subtle animation to form inputs */
+@keyframes formFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    animation: formFloat 0.3s forwards;
+}
+
+/* Update file input styles */
+.file-input-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(45deg, #1877f2, #2196F3);
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    min-width: 160px;
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.2);
+    transform-origin: center;
+}
+
+.file-input-label input[type="file"] {
+    display: none;
+}
+
+.file-input-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shine 2s infinite;
+}
+
+.file-input-label:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(45deg, #166fe5, #1e88e5);
+    box-shadow: 
+        0 6px 20px rgba(24, 119, 242, 0.3),
+        0 2px 4px rgba(24, 119, 242, 0.4);
+}
+
+.file-input-label:active {
+    transform: translateY(-1px);
+}
+
+.upload-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Remove the folder icon and add a modern animation */
+.upload-text::after {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.file-input-label:hover .upload-text::after {
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* Add ripple effect on click */
+.file-input-label.clicked::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    animation: rippleExpand 0.6s ease-out;
+}
+
+@keyframes rippleExpand {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* Add scale animation */
+.file-input-label.clicked {
+    animation: buttonClick 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Add multiple ripples for a more dynamic effect */
+.file-input-label.clicked::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.8) 0%, 
+        rgba(255,255,255,0) 60%
+    );
+    opacity: 0;
+    border-radius: 12px;
+    animation: pulseRing 0.6s ease-out;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.05);
+        opacity: 0;
+    }
+}
+
+/* Loading state with modern spinner */
+.file-input-label.loading {
+    pointer-events: none;
+    background: linear-gradient(45deg, #166fe5, #1e88e5);
+}
+
+.file-input-label.loading .upload-text {
+    opacity: 0;
+}
+
+.file-input-label.loading::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin: -12px 0 0 -12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Success state animation */
+.file-input-label.success {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.file-input-label.success .upload-text::after {
+    content: '✓';
+    transform: scale(1.2);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .file-input-label {
+    background: linear-gradient(45deg, #1877f2, #2196F3);
+}
+
+[data-theme="dark"] .file-input-label:hover {
+    background: linear-gradient(45deg, #166fe5, #1e88e5);
+}
+
+/* Add pulse animation on hover */
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(24, 119, 242, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(24, 119, 242, 0.4);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(24, 119, 242, 0.2);
+    }
+}
+
+.file-input-label:hover {
+    animation: buttonPulse 1.5s infinite;
+}
+
+/* Add more if needed for longer names */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    white-space: normal;
+}
+
+.about-content h2 span {
+    display: inline-block;
+}
+
+/* Update the welcome letter styles */
+.welcome-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: letterDrop 0.3s ease forwards;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes letterDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.about-content h2 span {
+    display: inline-block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.animated-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: 
+        letterFadeIn 0.3s ease forwards,
+        letterGlow 2s ease-in-out infinite;
+    animation-delay: var(--delay), calc(var(--delay) + 0.3s);
+    position: relative;
+    color: var(--text-color);
+}
+
+@keyframes letterFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes letterGlow {
+    0%, 100% {
+        color: var(--text-color);
+        text-shadow: none;
+    }
+    50% {
+        color: #fff;
+        text-shadow: 
+            0 0 5px rgba(255, 255, 255, 0.8),
+            0 0 10px rgba(147, 112, 219, 0.8),
+            0 0 15px rgba(147, 112, 219, 0.6),
+            0 0 20px rgba(147, 112, 219, 0.4),
+            0 0 25px rgba(138, 43, 226, 0.2);
+    }
+}
+
+.about-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    white-space: normal;
+}
+
+.about-content h2 span {
+    display: inline-block;
+}
+
+/* Add these animations at the end of the file */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these classes */
+.fade-in {
+    opacity: 0;
+}
+
+.fade-in.active {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Update these selectors to have initial opacity: 0 */
+.logo-container,
+.about-box,
+.contact-box,
+.top-controls {
+    opacity: 0;
+}
+
+/* Optional: Add different animation delays for a cascade effect */
+.logo-container.active {
+    animation-delay: 0.2s;
+}
+
+.about-box.active {
+    animation-delay: 0.4s;
+}
+
+.contact-box.active {
+    animation-delay: 0.6s;
+}
+
+.top-controls.active {
+    animation-delay: 0.1s;
+}
+
+/* Add styles for the welcome header container */
+.welcome-container {
+    text-align: center;
+    margin: 1.5rem 0;
+    opacity: 0;
+}
+
+.welcome-container.active {
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.welcome-header {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin: 0;
+    font-family: var(--heading-font);
+    font-weight: 600;
+}
+
+/* Update the fade-in elements list */
+.logo-container,
+.welcome-container,
+.about-box,
+.contact-box,
+.top-controls {
+    opacity: 0;
+}
+
+/* Update animation delays */
+.logo-container.active {
+    animation-delay: 0.2s;
+}
+
+.welcome-container.active {
+    animation-delay: 0.3s;
+}
+
+.about-box.active {
+    animation-delay: 0.4s;
+}
+
+.contact-box.active {
+    animation-delay: 0.6s;
+}
+
+.top-controls.active {
+    animation-delay: 0.1s;
+}

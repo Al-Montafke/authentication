@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= success ? 'Success' : 'Error' %></title>
+    <link rel="stylesheet" href="/result.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="result-container">
+        <div class="loader"></div>
+        <div class="message <%= success ? 'success' : 'error' %>">
+            <h2>
+                <i class="fas <%= success ? 'fa-check-circle' : 'fa-exclamation-circle' %>"></i>
+                <%= success ? 'Success!' : 'Error!' %>
+            </h2>
+            <p><%= message %></p>
+            <p class="redirect-message">
+                <i class="fas fa-sync-alt"></i>
+                <% if (success && page === 'signup') { %>
+                    Redirecting to login page...
+                <% } else if (success && page === 'login') { %>
+                    Redirecting to dashboard...
+                <% } else { %>
+                    Redirecting back to <%= page %> page...
+                <% } %>
+            </p>
+            <p class="countdown">
+                <i class="fas fa-clock"></i>
+                Redirecting in <span id="timer">3</span> seconds...
+            </p>
+        </div>
+    </div>
+    <script>
+        // Embed the page info for the JavaScript to use
+        window.currentPage = '<%= page %>';
+        window.isSuccess = '<%= success %>' === 'true';
+    </script>
+    <script src="/result.js"></script>
+</body>
+</html>

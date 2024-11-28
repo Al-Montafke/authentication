@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dashboard</title>
+    <link rel="stylesheet" href="/style/edit-about.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="top-controls">
+            <div class="theme-switch-wrapper">
+                <span class="theme-switch-label">🌞</span>
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="theme-switch-label">🌙</span>
+            </div>
+            <div class="logout-container">
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+        </div>
+        <div class="dashboard-header">
+            <h1>Edit Content</h1>
+            <div class="actions">
+                <button id="saveBtn" class="btn save-btn">Save Changes</button>
+                <button id="cancelBtn" class="btn cancel-btn">Cancel</button>
+            </div>
+        </div>
+        
+        <div class="editor-container">
+            <textarea id="contentEditor" class="content-editor" placeholder="Enter your content here..."><%- content %></textarea>
+            <div class="editor-tools">
+                <span class="char-count">Characters: <span id="charCount">0</span></span>
+                <div class="formatting-tools">
+                    <button class="tool-btn" data-format="bold">B</button>
+                    <button class="tool-btn" data-format="italic">I</button>
+                    <button class="tool-btn" data-format="underline">U</button>
+                </div>
+            </div>
+            
+            <div class="preview-container">
+                <div class="preview-header">
+                    <h3>Preview</h3>
+                    <button class="preview-toggle" id="previewToggle">Hide Preview</button>
+                </div>
+                <div class="preview-content" id="previewContent">
+                    <%- content %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/logout.js"></script>
+    <script src="/javascripts/theme-switcher.js"></script>
+    <script src="/javascripts/edit-about.js"></script>
+</body>
+</html>

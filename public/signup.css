@@ -1,0 +1,118 @@
+.error-message {
+    color: #e74c3c;
+    background-color: #fdf1f0;
+    border-left: 4px solid #e74c3c;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 15px 0;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: slideInError 0.3s ease forwards;
+}
+
+.error-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+    color: #e74c3c;
+    animation: pulseError 1s ease infinite;
+}
+
+@keyframes slideInError {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseError {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+button[type="submit"] {
+    position: relative;
+    transition: all 0.3s ease;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    padding: 12px;
+    display: block;
+    text-align: center;
+    min-height: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+button[type="submit"].loading {
+    background: #cccccc;
+    cursor: not-allowed;
+    color: transparent;
+}
+
+button[type="submit"].loading::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.form-group:last-of-type {
+    margin-bottom: 25px;
+}
+
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+@keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.error-message.slide-in {
+    animation: slideInError 0.3s ease forwards, shakeError 0.5s ease;
+} 

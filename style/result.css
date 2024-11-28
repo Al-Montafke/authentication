@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.result-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3.5rem;
+    border-radius: 24px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transform: translateY(0);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.loader {
+    border: 3px solid rgba(52, 152, 219, 0.1);
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    border-right: 3px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    margin: 0 auto 35px;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.15);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.message {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.3s;
+    padding: 30px;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.success {
+    color: #27ae60;
+    background: rgba(39, 174, 96, 0.08);
+    border: 2px solid rgba(39, 174, 96, 0.2);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.1);
+}
+
+.error {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.08);
+    border: 2px solid rgba(231, 76, 60, 0.2);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.1);
+}
+
+h2 {
+    margin: 0 0 25px 0;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+h2 i {
+    font-size: 32px;
+    animation: iconPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.8s;
+    transform: scale(0);
+}
+
+@keyframes iconPop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+p {
+    margin: 0 0 15px 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.redirect-message {
+    font-size: 16px;
+    color: #666;
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(52, 152, 219, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.redirect-message i {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.countdown {
+    font-size: 16px;
+    color: #666;
+    margin-top: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#timer {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    padding: 5px 15px;
+    border-radius: 20px;
+    min-width: 24px;
+    display: inline-block;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.2);
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.fas {
+    transition: all 0.3s ease;
+}
+
+.success .fas {
+    color: #27ae60;
+}
+
+.error .fas {
+    color: #e74c3c;
+}
+
+@media (max-width: 480px) {
+    .result-container {
+        padding: 2.5rem;
+        margin: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+}

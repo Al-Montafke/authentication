@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/style/home.css">
+    <script>
+        const initialTheme = '<%= theme %>';
+    </script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-controls">
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="logout-container">
+                <button class="logout-btn" id="logout-btn">
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <img src="<%= logo %>" alt="" id="logo-img" class="logo-image">
+                <div class="logo-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+            </div>
+            <label for="logo-input" class="file-input-label">
+                <span class="upload-text">Choose Logo</span>
+                <input type="file" id="logo-input" accept="image/png, image/jpeg, image/jpg, image/gif">
+            </label>
+        </div>
+        
+        <div class="welcome-container">
+            <h2 class="welcome-header">
+                <% const welcome = "Welcome back: " + username %>
+                <% welcome.split('').forEach((letter, index) => { %>
+                    <span class="welcome-letter"><%= letter %></span>
+                <% }) %>
+            </h2>
+        </div>
+        
+        <div class="about-box">
+            <h1>About Me</h1>
+            <div class="about-content">
+                <button class="edit-btn" id="edit-btn">Edit</button>
+                <p id="content"><%- content %></p>
+                
+                <div class="skills">
+                    <span class="skill-tag html-skill">
+                        <i class="fab fa-html5"></i>
+                        <span class="skill-tooltip">HTML5</span>
+                    </span>
+                    <span class="skill-tag css-skill">
+                        <i class="fab fa-css3-alt"></i>
+                        <span class="skill-tooltip">CSS3</span>
+                    </span>
+                    <span class="skill-tag js-skill">
+                        <i class="fab fa-js"></i>
+                        <span class="skill-tooltip">JavaScript</span>
+                    </span>
+                    <span class="skill-tag node-skill">
+                        <i class="fab fa-node-js"></i>
+                        <span class="skill-tooltip">Node.js</span>
+                    </span>
+                    <span class="skill-tag react-skill">
+                        <i class="fab fa-react"></i>
+                        <span class="skill-tooltip">React</span>
+                    </span>
+                    <span class="skill-tag git-skill">
+                        <i class="fab fa-git-alt"></i>
+                        <span class="skill-tooltip">Git</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h1>Contact Me</h1>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <script src="/javascripts/contact.js"></script>
+    <script src="/javascripts/home.js"></script>
+    <script src="/javascripts/logout.js"></script>
+    <script src="/javascripts/theme-switcher.js"></script>
+</body>
+</html>
