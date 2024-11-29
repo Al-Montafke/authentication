@@ -12,6 +12,15 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      uri: ${{ secrets.uri }}
+      PUBLICK_KEY: ${{ secrets.PUBLICK_KEY }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      SECRET: ${{ secrets.SECRET }}
+      google_app_password: ${{ secrets.google_app_password }}
+      email_address: ${{ secrets.email_address }}
+      pre_link: ${{ secrets.pre_link }}
 
     steps:
       - uses: actions/checkout@v4
@@ -63,13 +72,3 @@ jobs:
           app-name: 'mondotjs'
           slot-name: 'Production'
           package: .
-
-    env:
-      PUBLIC_KEY: szeuopzb
-      PRIVATE_KEY: 14d72251-d3e3-4a87-a5c2-bafef3845423
-      PROJECT_ID: 674238cc4a7b3167e15e7bd4
-      uri: mongodb+srv://AuthSinner:Eu5RX9bDJ4Pmjd1u@authcluster.x6n39.mongodb.net/
-      SECRET: 4234158b9f93861e0cc6cb3d5e709a25607c05a61ed57a9633eca588a13a1544
-      google_app_password: ergn vcoq naex jiha
-      email_address: Bell.Cranel9991@gmail.com
-      pre_link: https://localhost:3000
