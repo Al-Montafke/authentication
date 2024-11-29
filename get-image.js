@@ -3,6 +3,7 @@ dotenv.config();
 
 async function get_image(username, filename) {
     const response = await fetch(`${process.env.pre_link}/user/${username}/images/${filename}`);
+    console.log(`Response: ${response.status}`);
     if (response.status === 404) return null;
 
     return response.url;

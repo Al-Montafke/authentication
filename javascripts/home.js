@@ -131,11 +131,11 @@ function check_logo_input() {
                 }).then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        for (const info of Object.values(data)) {
-                            console.log(`info: ${info}`);
-                        }
                         setTimeout(() => {
-                            elem.src = data.link;
+                            for (const info of Object.values(data)) {
+                                console.log(`info: ${info}`);
+                            }
+                            logo.src = data.link;
                         }, 3000);
                     } else {
                         throw new Error('Failed to save image');
