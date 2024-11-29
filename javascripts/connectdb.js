@@ -13,7 +13,6 @@ async function connect() {
     for (let tries = 3; tries > 0; tries--) {
         try {
             await client.connect();
-            console.log('Connected to the database!');
             connected = true;
             return client;
         } catch (err) {
