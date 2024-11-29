@@ -12,6 +12,15 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      uri: ${{ secrets.uri }}
+      PUBLICK_KEY: ${{ secrets.PUBLICK_KEY }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      SECRET: ${{ secrets.SECRET }}
+      google_app_password: ${{ secrets.google_app_password }}
+      email_address: ${{ secrets.email_address }}
+      pre_link: ${{ secrets.pre_link }}
 
     steps:
       - uses: actions/checkout@v4
@@ -56,10 +65,10 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_429BDFAFD4804E4CB1F9238D833A4BC8 }}
 
       - name: 'Deploy to Azure Web App'
+      
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'mondotjs'
           slot-name: 'Production'
           package: .
-          
