@@ -204,6 +204,10 @@ app.post('/api/save-theme', get_user_token, async (req, res) => {
     }
 });
 
+app.listen(port, () => {
+    console.log(`Listening on port: ${port}`);
+})
+
 app.post('/user/:username/home/contact', async (req, res) => {
     const { username } = req.params;
     const { email, message } = req.body;
@@ -267,4 +271,4 @@ app.get('/user/:username/images/:img', async (req, res) => {
     res.sendFile(img_path);
 });
 
-module.exports = app; 
+module.exports = { app }
